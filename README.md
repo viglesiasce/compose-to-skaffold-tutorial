@@ -30,7 +30,7 @@ If you have a Google account and want to try it in a free sandbox environment cl
 
 1. The Docker Compose file in docker-taiga doesn’t set ports for all the services which is required for proper discoverability when things are converted to Kubernetes. Apply the following patch to ensure each service exposes its ports properly.
 
-    ```sh
+    ```shell
     cat > compose.diff <<EOF
     diff --git a/docker-compose.yml b/docker-compose.yml
     index e09d717..94920c8 100644
