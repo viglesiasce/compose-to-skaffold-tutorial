@@ -73,53 +73,51 @@ If you have a Google account and want to try it in a free sandbox environment cl
 
 1. Now that we have our source code, Dockerfile, and Compose File, we’ll run skaffold init to generate the skaffold.yaml and Kubernetes manifests.
 
-  ```sh
-  skaffold init --compose-file docker-compose.yml
-  ```
-  
-  Skaffold will ask which Dockerfiles map to the images in the Kubernetes manifests.
-  **The default answers are correct for all questions except the last. Make sure to answer yes (y) when it asks if you want to write out the file.**
-
-  
+    ```sh
+    skaffold init --compose-file docker-compose.yml
     ```
-    ? Choose the builder to build image dockertaiga/back Docker (taiga-back/docker/Dockerfile)
-    ? Choose the builder to build image dockertaiga/events None (image not built from these sources)
-    ? Choose the builder to build image dockertaiga/front None (image not built from these sources)
-    ? Choose the builder to build image dockertaiga/proxy None (image not built from these sources)
-    ? Choose the builder to build image dockertaiga/rabbit None (image not built from these sources)
-    ? Choose the builder to build image postgres None (image not built from these sources)
-    apiVersion: skaffold/v2beta12
-    kind: Config
-    metadata:
-    name: taiga
-    build:
-    artifacts:
-    - image: dockertaiga/back
-      context: taiga-back/docker
-      docker:
-        dockerfile: Dockerfile
-    deploy:
-    kubectl:
-      manifests:
-      - kubernetes/back-claim0-persistentvolumeclaim.yaml
-      - kubernetes/back-claim1-persistentvolumeclaim.yaml
-      - kubernetes/back-deployment.yaml
-      - kubernetes/db-claim0-persistentvolumeclaim.yaml
-      - kubernetes/db-deployment.yaml
-      - kubernetes/default-networkpolicy.yaml
-      - kubernetes/events-deployment.yaml
-      - kubernetes/front-claim0-persistentvolumeclaim.yaml
-      - kubernetes/front-deployment.yaml
-      - kubernetes/proxy-claim0-persistentvolumeclaim.yaml
-      - kubernetes/proxy-deployment.yaml
-      - kubernetes/proxy-service.yaml
-      - kubernetes/rabbit-deployment.yaml
-      - kubernetes/variables-env-configmap.yaml
+  
+    Skaffold will ask which Dockerfiles map to the images in the Kubernetes manifests.
+    
+    **The default answers are correct for all questions except the last. Make sure to answer yes (y) when it asks if you want to write out the file.**
+  
+        ? Choose the builder to build image dockertaiga/back Docker (taiga-back/docker/Dockerfile)
+        ? Choose the builder to build image dockertaiga/events None (image not built from these sources)
+        ? Choose the builder to build image dockertaiga/front None (image not built from these sources)
+        ? Choose the builder to build image dockertaiga/proxy None (image not built from these sources)
+        ? Choose the builder to build image dockertaiga/rabbit None (image not built from these sources)
+        ? Choose the builder to build image postgres None (image not built from these sources)
+        apiVersion: skaffold/v2beta12
+        kind: Config
+        metadata:
+        name: taiga
+        build:
+        artifacts:
+        - image: dockertaiga/back
+          context: taiga-back/docker
+          docker:
+            dockerfile: Dockerfile
+        deploy:
+        kubectl:
+          manifests:
+          - kubernetes/back-claim0-persistentvolumeclaim.yaml
+          - kubernetes/back-claim1-persistentvolumeclaim.yaml
+          - kubernetes/back-deployment.yaml
+          - kubernetes/db-claim0-persistentvolumeclaim.yaml
+          - kubernetes/db-deployment.yaml
+          - kubernetes/default-networkpolicy.yaml
+          - kubernetes/events-deployment.yaml
+          - kubernetes/front-claim0-persistentvolumeclaim.yaml
+          - kubernetes/front-deployment.yaml
+          - kubernetes/proxy-claim0-persistentvolumeclaim.yaml
+          - kubernetes/proxy-deployment.yaml
+          - kubernetes/proxy-service.yaml
+          - kubernetes/rabbit-deployment.yaml
+          - kubernetes/variables-env-configmap.yaml
 
-    ? Do you want to write this configuration to skaffold.yaml? Yes
-    ```
+        ? Do you want to write this configuration to skaffold.yaml? Yes
 
-  We’ll also fix an issue with the Docker context configuration that Skaffold interpreted from the Compose File. The taiga-back repo keeps its Dockerfile in a sub-folder rather than the top-level and uses the context from the root. Also
+    We’ll also fix an issue with the Docker context configuration that Skaffold interpreted from the Compose File. The taiga-back repo keeps its Dockerfile in a sub-folder rather than the top-level and uses the context from the root. Also
 
     ```sh
     sed -i 's/context:.*/context: taiga-back/' skaffold.yaml
