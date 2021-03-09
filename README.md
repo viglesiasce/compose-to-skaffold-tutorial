@@ -81,24 +81,24 @@ If you have a Google account and want to try it in a free sandbox environment cl
   **The default answers are correct for all questions except the last. Make sure to answer yes (y) when it asks if you want to write out the file.**
 
   
-  ```
-  ? Choose the builder to build image dockertaiga/back Docker (taiga-back/docker/Dockerfile)
-  ? Choose the builder to build image dockertaiga/events None (image not built from these sources)
-  ? Choose the builder to build image dockertaiga/front None (image not built from these sources)
-  ? Choose the builder to build image dockertaiga/proxy None (image not built from these sources)
-  ? Choose the builder to build image dockertaiga/rabbit None (image not built from these sources)
-  ? Choose the builder to build image postgres None (image not built from these sources)
-  apiVersion: skaffold/v2beta12
-  kind: Config
-  metadata:
+    ```
+    ? Choose the builder to build image dockertaiga/back Docker (taiga-back/docker/Dockerfile)
+    ? Choose the builder to build image dockertaiga/events None (image not built from these sources)
+    ? Choose the builder to build image dockertaiga/front None (image not built from these sources)
+    ? Choose the builder to build image dockertaiga/proxy None (image not built from these sources)
+    ? Choose the builder to build image dockertaiga/rabbit None (image not built from these sources)
+    ? Choose the builder to build image postgres None (image not built from these sources)
+    apiVersion: skaffold/v2beta12
+    kind: Config
+    metadata:
     name: taiga
-  build:
+    build:
     artifacts:
     - image: dockertaiga/back
       context: taiga-back/docker
       docker:
         dockerfile: Dockerfile
-  deploy:
+    deploy:
     kubectl:
       manifests:
       - kubernetes/back-claim0-persistentvolumeclaim.yaml
@@ -116,30 +116,30 @@ If you have a Google account and want to try it in a free sandbox environment cl
       - kubernetes/rabbit-deployment.yaml
       - kubernetes/variables-env-configmap.yaml
 
-  ? Do you want to write this configuration to skaffold.yaml? Yes
-  ```
+    ? Do you want to write this configuration to skaffold.yaml? Yes
+    ```
 
   We’ll also fix an issue with the Docker context configuration that Skaffold interpreted from the Compose File. The taiga-back repo keeps its Dockerfile in a sub-folder rather than the top-level and uses the context from the root. Also
 
-  ```sh
-  sed -i 's/context:.*/context: taiga-back/' skaffold.yaml
-  sed -i 's/dockerfile:.*/dockerfile: docker\/Dockerfile/' skaffold.yaml
-  sed -i 's/name: TAIGA_SECRET/name: TAIGA_SECRET_KEY/' back-deployment.yaml
-  ```
+    ```sh
+    sed -i 's/context:.*/context: taiga-back/' skaffold.yaml
+    sed -i 's/dockerfile:.*/dockerfile: docker\/Dockerfile/' skaffold.yaml
+    sed -i 's/name: TAIGA_SECRET/name: TAIGA_SECRET_KEY/' back-deployment.yaml
+    ```
 
 1. Now we’re ready to run Skaffold’s dev loop to continuously re-build and re-deploy our app as we make changes to the source code. Skaffold will also display the logs of the app and even port-forward important ports to your machine.
 
   You should start to see the backend running the database migrations necessary to start the app and be able to get to the web app via this link: http://localhost:4056
 
-  ```sh
-  skaffold dev --port-forward
-  ```
+    ```sh
+    skaffold dev --port-forward
+    ```
   
 1. To initialize the first user, run the following command in a new terminal and then log in to Taiga with the username admin and password 123123.
 
-```sh
-kubectl exec deployment/back python manage.py loaddata initial_user
-```
+    ```sh
+    kubectl exec deployment/back python manage.py loaddata initial_user
+    ```
 
 Congrats! You’ve now transitioned your development tooling from Docker Compose to Skaffold and Minikube.
 
