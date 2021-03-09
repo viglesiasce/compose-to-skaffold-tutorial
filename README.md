@@ -78,10 +78,10 @@ If you have a Google account and want to try it in a free sandbox environment cl
   ```
   
   Skaffold will ask which Dockerfiles map to the images in the Kubernetes manifests.
+  **The default answers are correct for all questions except the last. Make sure to answer yes (y) when it asks if you want to write out the file.**
+
   
   ```
-  The default answers are correct for all questions except the last. Make sure to answer yes (y) when it asks if you want to write out the file.
-
   ? Choose the builder to build image dockertaiga/back Docker (taiga-back/docker/Dockerfile)
   ? Choose the builder to build image dockertaiga/events None (image not built from these sources)
   ? Choose the builder to build image dockertaiga/front None (image not built from these sources)
