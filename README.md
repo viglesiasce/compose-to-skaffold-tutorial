@@ -73,10 +73,13 @@ If you have a Google account and want to try it in a free sandbox environment cl
 
 1. Now that we have our source code, Dockerfile, and Compose File, we’ll run skaffold init to generate the skaffold.yaml and Kubernetes manifests.
 
-  ```
+  ```sh
   skaffold init --compose-file docker-compose.yml
+  ```
+  
   Skaffold will ask which Dockerfiles map to the images in the Kubernetes manifests.
-
+  
+  ```
   The default answers are correct for all questions except the last. Make sure to answer yes (y) when it asks if you want to write out the file.
 
   ? Choose the builder to build image dockertaiga/back Docker (taiga-back/docker/Dockerfile)
