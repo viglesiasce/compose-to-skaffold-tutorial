@@ -5,7 +5,7 @@
 Visit the following blog post for more context:
 https://testingclouds.wordpress.com/2021/03/09/migrating-from-docker-compose-to-skaffold/
 
-This tutorial will walk you through the same process of moving an app from a Docker Compose development setup to using [Skaffold](https://skaffold.dev) and [Minikube](https://minikube.sigs.k8s.io/docs/).
+This tutorial will walk you through the same process of moving an app from a Docker Compose development setup to using [Skaffold](https://skaffold.dev) and [Minikube](https://minikube.sigs.k8s.io/docs/). In this case, the app is Taiga which is an open source "project management tool for multi-functional agile teams".
 
 If you have a Google account and want to try it in a free sandbox environment click here:
 
