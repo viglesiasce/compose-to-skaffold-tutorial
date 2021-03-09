@@ -127,7 +127,7 @@ If you have a Google account and want to try it in a free sandbox environment cl
 
 1. Now we’re ready to run Skaffold’s dev loop to continuously re-build and re-deploy our app as we make changes to the source code. Skaffold will also display the logs of the app and even port-forward important ports to your machine.
 
-  You should start to see the backend running the database migrations necessary to start the app and be able to get to the web app via this link: http://localhost:4056
+    You should start to see the backend running the database migrations necessary to start the app and be able to get to the web app via this link: http://localhost:4056
 
     ```sh
     skaffold dev --port-forward
