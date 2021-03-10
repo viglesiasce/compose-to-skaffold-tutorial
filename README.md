@@ -18,7 +18,7 @@ If you have a Google account and want to try it in a free sandbox environment cl
 1. Install [Kompose](https://kompose.io/) which Skaffold uses under the hood to convert the docker-compose.yml to Kubernetes manifests.
 
     ```sh
-    curl -L https://github.com/kubernetes-incubator/kompose/releases/download/v0.7.0/kompose-linux-amd64 -o kompose
+    curl -L https://github.com/kubernetes/kompose/releases/download/v1.22.0/kompose-linux-amd64 -o kompose
     chmod +x kompose
     sudo mv ./kompose /usr/local/bin/kompose
     ```
